@@ -28,7 +28,6 @@
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
         <title>Hello World</title>
     </head>
-    body>
     <div class="app">
         <h1>PhoneGap</h1>
         <div id="deviceready" class="blink">
@@ -39,59 +38,25 @@
     <script type="text/javascript" src="PushNotification.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-		var pushNotification;
+		var push = PushNotification.init({ "android": {"senderID": "721393051486"},
+         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
 
-function successHandler (result) {
-}
-function errorHandler (error) {
-}
-
-window.onNotificationGCM = function(e) {
-    switch( e.event )
-    {
-        case 'registered':
-            if ( e.regid.length > 0 )
-            {
-                console.log('REGISTERED -> REGID:' + e.regid );
-            }
-            break;
-        case 'message':
-            console.log('gcm: on message ');
-            break;
-
-        case 'error':
-            console.log( "gcm error: "+e.msg );
-            break;
-        default:
-            break;
-    }
-};
-
-function initialize() {
-    document.addEventListener("deviceready", function(){
-        console.log("device ready");
-
-        pushNotification = window.plugins.pushNotification;
-        if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" ){
-            try {
-                pushNotification.register(
-                    successHandler, errorHandler, { "senderID":"168738893245", "ecb":"window.onNotificationGCM" });
-            } catch(err)
-            {
-                txt="There was an error on this page.\n\n";
-                txt+="Error description: " + err.message + "\n\n";
-                alert(txt);
-            }
-        }
-
+    push.on('registration', function(data) {
+        // data.registrationId
     });
-}
-</script>
-<body>
-<h1>Push Notification Example</h1>
-Your GCM ID : <br/>
-<p id="gcm_id"></p>
-</body>
+
+    push.on('notification', function(data) {
+        // data.message,
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+    });
+
+    push.on('error', function(e) {
+        // e.message
+    });
 </html>
 
   
