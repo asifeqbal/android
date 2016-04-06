@@ -39,31 +39,11 @@
     <script type="text/javascript" src="PushNotification.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-		  document.addEventListener("deviceready",onDeviceReady,false);
-	function onDeviceReady(){
-	    alert('hi nagesh1'); 
+		document.addEventListener("deviceready", onDeviceReady, false);  
+		function onDeviceReady() {
+                alert('hi nagesh1'); 
 	console.log("Device Ready")
-	var push = PushNotification.init({ "android": {"senderID": "168738893245"},
-	"ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
-
-	push.on('registration', function(data) {
-	console.log(data.registrationId);
-	$("#gcm_id").html(data.registrationId);
-	});
-
-	push.on('notification', function(data) {
-	console.log(data.message);
-	alert(data.title+" Message: " +data.message);
-	// data.title,
-	// data.count,
-	// data.sound,
-	// data.image,
-	// data.additionalData
-	});
-
-	push.on('error', function(e) {
-	console.log(e.message);
-	});
+	
 	}
 </script>
 <body>
