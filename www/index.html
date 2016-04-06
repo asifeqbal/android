@@ -41,6 +41,7 @@
     <script type="text/javascript">
 		  document.addEventListener("deviceready",onDeviceReady,false);
 	function onDeviceReady(){
+	    alert('hi nagesh1'); 
 	console.log("Device Ready")
 	var push = PushNotification.init({ "android": {"senderID": "168738893245"},
 	"ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
