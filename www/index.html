@@ -38,25 +38,32 @@
     <script type="text/javascript" src="PushNotification.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-		var push = PushNotification.init({ "android": {"senderID": "721393051486"},
-         "ios": {"alert": "true", "badge": "true", "sound": "true"}, "windows": {} } );
+		 //app.initialize() ;
+		document.addEventListener("deviceready", onDeviceReady, false);  
+		function onDeviceReady() {
+                alert('hi Anirban');   
+			    pushNotification = window.plugins.PushNotification; 
+			       alert('hi Anirban2'); 			    
+			    if (device.platform == 'android' || device.platform == 'Android' || device.platform == 'amazon-fireos' ) {    alert('hi Anirban3'); 
+						 pushNotification.register(tokenHandler, errorHandler, {"senderID":"168738893245","ecb":"onNotification"});		// required!
+					} else {   alert('hi Anirban4'); 
+                    	pushNotification.register(tokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});	// required!
+                	}
+         }
+        
+		// Handle push token result
+		function tokenHandler (result) {
+			// Your iOS push server needs to know the token before it can push to this device
+			// here is where you might want to send it the token for later use.
+			alert('device token = ' + result);
 
-    push.on('registration', function(data) {
-        // data.registrationId
-    });
+			//getMyUi(result);              
+		}
+		   
+		/*function errorHandler (error) {
+			alert('error:'+ error );
+		}*/
+    </script>
+</body>
 
-    push.on('notification', function(data) {
-        // data.message,
-        // data.title,
-        // data.count,
-        // data.sound,
-        // data.image,
-        // data.additionalData
-    });
-
-    push.on('error', function(e) {
-        // e.message
-    });
 </html>
-
-  
